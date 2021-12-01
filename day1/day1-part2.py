@@ -7,13 +7,7 @@ def solve():
 
     previous = None
 
-    with open('input.txt') as input:
-        for value in input:
-            data.append(int(value.strip()))
-
-    for i in range(0, len(data) - 2):
-        value = (data[i:i+3])
-
+    for value in get_set():
         if previous:
             sumval = sum(value)
             sumprev = sum(previous)
@@ -30,6 +24,21 @@ def solve():
         previous = value
 
     print(f"inc: {increases} dec: {decreases} same: {same}")
+
+
+def get_set():
+    a = None
+    b = None
+    c = None
+
+    with open('input.txt') as input:
+        for value in input:
+            [a, b, c] = [b, c, int(value.strip())]
+
+            if a is None:
+                continue
+
+            yield a, b, c
 
 
 if __name__ == '__main__':
