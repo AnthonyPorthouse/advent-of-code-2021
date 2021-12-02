@@ -1,3 +1,4 @@
+from typing import Generator, Tuple
 from enum import Enum
 
 
@@ -23,7 +24,7 @@ class Command(Enum):
     FORWARD = 'forward'
 
 
-def get_command(filename: str):
+def get_command(filename: str) -> Generator[Tuple[Command, int], None, None]:
     with open(filename) as file:
         for value in file:
             value = value.strip()
