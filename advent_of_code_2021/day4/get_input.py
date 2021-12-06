@@ -1,6 +1,6 @@
-from typing import Generator, List, Iterable
+from typing import Generator
 
-from day4.board import Board
+from .board import Board
 
 
 def get_numbers(filename: str) -> Generator[int, None, None]:

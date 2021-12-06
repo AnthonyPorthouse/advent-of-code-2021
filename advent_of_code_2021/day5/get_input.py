@@ -1,6 +1,6 @@
 from typing import Generator, Tuple
 
-from day5.Point import Point
+from .Point import Point
 
 
 def get_points(filename: str) -> Generator[Tuple[Point, Point], None, None]:

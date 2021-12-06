@@ -1,6 +1,6 @@
 from typing import List, Tuple
 
-from day3.get_input import get_input
+from .get_input import get_input
 
 
 def solve(filename: str) -> None:

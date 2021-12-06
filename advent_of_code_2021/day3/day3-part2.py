@@ -1,7 +1,6 @@
-import logging
-from typing import List, Tuple
+from typing import List
 
-from day3.get_input import get_input, get_input_numbers
+from .get_input import get_input, get_input_numbers
 
 
 def solve(filename: str) -> None:

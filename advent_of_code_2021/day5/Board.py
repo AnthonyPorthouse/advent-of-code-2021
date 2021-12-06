@@ -1,6 +1,6 @@
 from typing import List
 
-from day5.Point import Point
+from .Point import Point
 
 
 class Board:

@@ -1,5 +1,5 @@
-from day5.Board import Board
-from day5.get_input import get_points
+from .Board import Board
+from .get_input import get_points
 
 
 def solve(filename: str) -> None:
@@ -13,7 +13,7 @@ def solve(filename: str) -> None:
     board = Board(max_x, max_y)
 
     for a, b in get_points(filename):
-        board.mark_points(a, b)
+        board.mark_points(a, b, True)
 
     print(board)
     print(f'board size: {board.width}x{board.height}')

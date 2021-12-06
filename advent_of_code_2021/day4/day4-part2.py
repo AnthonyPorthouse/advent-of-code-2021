@@ -1,4 +1,4 @@
-from day4.get_input import get_numbers, get_boards
+from .get_input import get_numbers, get_boards
 
 
 def solve(filename: str) -> None:
@@ -16,10 +16,13 @@ def solve(filename: str) -> None:
 
         for index, board in enumerate(boards):
             if board.is_solved(called):
-                print(f'Board {index + 1} wins, score: {board.get_score(called, num)}')
-                return
+                if len(boards) > 1:
+                    boards.remove(board)
+                else:
+                    print(f'Losing board finally won, score: {boards[0].get_score(called, num)}')
+                    return
 
-        print(f'No Winners Yet')
+        print(f'Not found the losing board yet')
 
 
 if __name__ == '__main__':
