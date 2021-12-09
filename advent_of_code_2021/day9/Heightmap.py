@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List, Set, Optional
 
 from advent_of_code_2021.day9.Point import Point
 
@@ -19,26 +19,21 @@ class Heightmap:
         checked = set()
 
         for point, val in self.values.items():
-            print(f'checking for {point}')
             if point in checked:
                 continue
 
             lowest_neighbour = True
             for adj_point in point.get_adjacent_points():
                 if adj_point not in self.values:
-                    print(f'{adj_point} not valid, skipping')
                     continue
 
                 if val >= self.values.get(adj_point):
-                    print(f'{point} >= {adj_point}, stopping checking')
                     lowest_neighbour = False
                     break
 
-            print(f'marking {point} as checked')
             checked.add(point)
 
             if lowest_neighbour:
-                print(f'{point} is the lowest neighbor, also marking adjacent points as checked')
                 [checked.add(p) for p in point.get_adjacent_points()]
                 lowest.append(point)
 
@@ -50,3 +45,21 @@ class Heightmap:
     @property
     def values(self) -> Dict[Point, int]:
         return self._values
+
+    def find_basins(self) -> List[Set[Point]]:
+        return [basin for basin in [self.find_basin(low_point) for low_point in self.find_lowest_points()]]
+
+    def find_basin(self, point: Point, checked: Set[Point] = None) -> Set[Point]:
+        if checked is None:
+            checked = set()
+
+        checked.add(point)
+
+        for adjacent in point.get_adjacent_points():
+            if adjacent in checked:
+                continue
+
+            if adjacent in self.values and self.values.get(adjacent) < 9:
+                checked.union(self.find_basin(adjacent, checked))
+
+        return checked
