@@ -48,14 +48,15 @@ class PathCalculator:
             current_steps.append(node)
 
         for next_node in node.connections:
+            next_backtracked_node = backtracked_node
             if next_node.type is NodeType.START:
                 continue
 
             if next_node.type is NodeType.SMALL and next_node in current_steps:
-                if backtracked_node is not None:
+                if next_backtracked_node is not None:
                     continue
                 else:
-                    backtracked_node = next_node
+                    next_backtracked_node = next_node
 
             if next_node.type is NodeType.END:
                 next_steps = current_steps.copy()
@@ -63,7 +64,7 @@ class PathCalculator:
                 routes.append(next_steps)
                 continue
 
-            results = self.find_paths_with_backtracking(next_node, backtracked_node, current_steps.copy())
+            results = self.find_paths_with_backtracking(next_node, next_backtracked_node, current_steps.copy())
 
             for result in results:
                 routes.append(result)
