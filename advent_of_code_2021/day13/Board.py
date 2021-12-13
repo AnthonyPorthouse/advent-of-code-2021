@@ -24,7 +24,7 @@ class Board:
             self.board.add(point)
 
     def fold_at_y(self, y: int) -> None:
-        self.height = y
+        self.height = y - 1
 
         new_board = set()
 
@@ -35,8 +35,10 @@ class Board:
             else:
                 new_board.add(point)
 
+        self.board = new_board
+
     def fold_at_x(self, x: int) -> None:
-        self.width = x
+        self.width = x - 1
 
         new_board = set()
 
@@ -46,6 +48,8 @@ class Board:
                 new_board.add(Point(new_x, point.y))
             else:
                 new_board.add(point)
+
+        self.board = new_board
 
     def __repr__(self) -> str:
         out = ''

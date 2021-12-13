@@ -19,5 +19,5 @@ def get_folds(filename: str) -> Generator[list[str], None, None]:
         for line in file:
             line = line.strip()
             if line[0:11] == 'fold along ':
-                fold = line[12:]
+                fold = line[11:]
                 yield fold.split('=')
